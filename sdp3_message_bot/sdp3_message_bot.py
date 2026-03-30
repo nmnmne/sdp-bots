@@ -257,8 +257,13 @@ async def check_status_loop(application):
 def main():
     application = Application.builder().token(TOKEN).build()
     
-    # Добавляем обработчик сообщений для пересылки
-    application.add_handler(MessageHandler(filters.ALL, forward_message))
+    # Пересылка только из групп, супергрупп и каналов — не из лички
+    application.add_handler(
+        MessageHandler(
+            filters.ChatType.GROUPS | filters.ChatType.CHANNEL,
+            forward_message,
+        )
+    )
 
     # Запускаем фоновую задачу мониторинга статусов при старте
     async def on_startup(app):
