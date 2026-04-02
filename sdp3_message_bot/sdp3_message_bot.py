@@ -44,7 +44,7 @@ TARGET_NUMBERS = [
     number.strip()
     for number in os.getenv(
         "TARGET_NUMBERS",
-        "Swarco LABA,!TEST-POTOK-1,827,818,828,854,3632,2191,3139,3355,2274",
+        "827,818,828,854,3632,2191,3139,3355,2274",
     ).split(",")
     if number.strip()
 ]
@@ -138,10 +138,10 @@ async def fetch_status():
 async def check_status_loop(application):
     global last_status, pending_changes
     
-    # Основной интервал проверки (150 секунд)
-    MAIN_CHECK_INTERVAL = 150
-    # Интервал для повторной проверки при обнаружении изменений (150 секунд)
-    CONFIRMATION_INTERVAL = 150
+    # Основной интервал проверки (60 секунд)
+    MAIN_CHECK_INTERVAL = 60
+    # Интервал для повторной проверки при обнаружении изменений (60 секунд)
+    CONFIRMATION_INTERVAL = 60
     # Максимальное число проверок неподтвержденного изменения, чтобы избежать зацикливания
     MAX_PENDING_ATTEMPTS = 2
     
